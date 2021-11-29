@@ -1,6 +1,8 @@
-mod core;
+pub mod nucleotide;
+pub mod chromosome;
+pub mod genetic;
+pub mod organism;
 
-pub mod prelude;
 
 
 #[cfg(test)]
