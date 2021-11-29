@@ -1,4 +1,7 @@
-pub mod core;
+mod core;
+
+pub mod prelude;
+
 
 #[cfg(test)]
 mod tests {
