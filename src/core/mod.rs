@@ -1,4 +1,4 @@
-mod chromosome;
-mod genetic;
-mod nucleotide;
-mod organism;
+pub mod chromosome;
+pub mod genetic;
+pub mod nucleotide;
+pub mod organism;
