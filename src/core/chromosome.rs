@@ -6,7 +6,7 @@ use std::{
 
 // Preconditions: Chromosome.len() % 4 == 0
 #[derive(Debug, PartialEq, Clone)]
-pub struct Chromosome(Vec<u8>);
+pub struct Chromosome(pub Vec<u8>);
 impl Chromosome {}
 
 impl fmt::Display for Chromosome {
