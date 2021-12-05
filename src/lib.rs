@@ -1,7 +1,6 @@
 pub mod nucleotide;
 pub mod chromosome;
 pub mod genetic;
-pub mod organism;
 
 
 
