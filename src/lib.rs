@@ -1,8 +1,10 @@
-pub mod nucleotide;
-pub mod chromosome;
-pub mod genetic;
+mod nucleotide;
+mod chromosome;
+mod genetic;
 
-
+pub use nucleotide::*;
+pub use chromosome::*;
+pub use genetic::*;
 
 #[cfg(test)]
 mod tests {
