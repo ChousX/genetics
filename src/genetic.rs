@@ -1,10 +1,6 @@
-use super::chromosome::{self, Chromosome};
-use super::nucleotide::{Nucleotide, A, C, DNA, G, T};
-use rand::{thread_rng, Rng};
-use std::{
-    convert::From,
-    fmt::{self, write},
-};
+use super::chromosome::Chromosome;
+use super::nucleotide::DNA;
+use std::convert::From;
 
 #[derive(Debug, Clone)]
 pub enum GeneticType {

@@ -1,9 +1,6 @@
-use super::nucleotide::{Nucleotide, NucleotideSegment, A, C, DNA, G, T};
-use std::{
-    convert::From,
-    fmt::{self, write},
-};
-
+use super::nucleotide::{ NucleotideSegment, DNA};
+use std::convert::From;
+use std::fmt;
 // Preconditions: Chromosome.len() % 4 == 0
 #[derive(Debug, PartialEq, Clone)]
 pub struct Chromosome(pub Vec<u8>);
@@ -50,6 +47,7 @@ impl From<Chromosome> for DNA {
 
 #[cfg(test)]
 mod tests {
+    use super::super::nucleotide::*;
     use super::*;
     #[test]
     fn dna_to_chromosome() {
