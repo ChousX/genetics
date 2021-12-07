@@ -1,4 +1,4 @@
-use super::nucleotide::{ NucleotideSegment, DNA};
+use super::nucleotide::{NucleotideSegment, DNA};
 use std::convert::From;
 use std::fmt;
 // Preconditions: Chromosome.len() % 4 == 0

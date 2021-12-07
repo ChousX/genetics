@@ -30,7 +30,6 @@ impl GeneticType {
     }
 }
 
-
 impl From<GeneticType> for Chromosome {
     fn from(item: GeneticType) -> Chromosome {
         item.to_chromosome()
@@ -64,15 +63,15 @@ impl Genetic for f32 {
     fn compress(&self) -> GeneticType {
         let s = self;
         let bits = s.to_be_bytes();
-        let v = vec![ bits[1].to_owned(), bits[2].to_owned(), bits[3].to_owned()];
-        let c = Chromosome(v); 
+        let v = vec![bits[1].to_owned(), bits[2].to_owned(), bits[3].to_owned()];
+        let c = Chromosome(v);
         GeneticType::Chromosome(c)
     }
 
     fn generait(input: GeneticType) -> Self {
-        let c:Chromosome = input.into();
-        let mut accum: [u8; 4] = [0;4];
-        for (i, n) in c.0.iter().enumerate(){
+        let c: Chromosome = input.into();
+        let mut accum: [u8; 4] = [0; 4];
+        for (i, n) in c.0.iter().enumerate() {
             accum[i] = *n;
         }
         f32::from_be_bytes(accum)
