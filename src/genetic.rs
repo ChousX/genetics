@@ -63,7 +63,7 @@ impl Genetic for f32 {
     fn compress(&self) -> GeneticType {
         let s = self;
         let bits = s.to_be_bytes();
-        let v = vec![bits[1].to_owned(), bits[2].to_owned(), bits[3].to_owned()];
+        let v = vec![bits[0], bits[1].to_owned(), bits[2].to_owned(), bits[3].to_owned()];
         let c = Chromosome(v);
         GeneticType::Chromosome(c)
     }
@@ -77,3 +77,24 @@ impl Genetic for f32 {
         f32::from_be_bytes(accum)
     }
 }
+
+impl Genetic for u32{
+    fn compress(&self) -> GeneticType {
+        let s = self;
+        let bits = s.to_be_bytes();
+        let v = vec![bits[0], bits[1].to_owned(), bits[2].to_owned(), bits[3].to_owned()];
+        let c = Chromosome(v);
+        GeneticType::Chromosome(c)
+    }
+
+    fn generait(input: GeneticType) -> Self {
+        let c: Chromosome = input.into();
+        let mut accum: [u8; 4] = [0; 4];
+        for (i, n) in c.0.iter().enumerate() {
+            accum[i] = *n;
+        }
+        u32::from_be_bytes(accum)
+    }
+}
+
+//TODO: going to need to make some convertion tests
