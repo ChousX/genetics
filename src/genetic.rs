@@ -36,6 +36,13 @@ impl From<GeneticType> for Chromosome {
     }
 }
 
+impl From<Vec<u8>> for GeneticType{
+    fn from(item: Vec<u8>) -> Self {
+        let c: Chromosome = item.into();
+        GeneticType::Chromosome(c)
+    }
+}
+
 impl From<Chromosome> for GeneticType {
     fn from(item: Chromosome) -> GeneticType {
         GeneticType::Chromosome(item)
