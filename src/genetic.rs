@@ -9,7 +9,7 @@ pub enum GeneticType {
 }
 
 impl GeneticType {
-    fn to_dna(self) -> DNA {
+    pub fn to_dna(self) -> DNA {
         match self {
             Self::Chromosome(c) => {
                 let d: DNA = c.into();
@@ -19,7 +19,7 @@ impl GeneticType {
         }
     }
 
-    fn to_chromosome(self) -> Chromosome {
+    pub fn to_chromosome(self) -> Chromosome {
         match self {
             Self::Chromosome(c) => c,
             Self::Dna(d) => {
