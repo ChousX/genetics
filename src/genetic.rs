@@ -54,6 +54,7 @@ impl From<GeneticType> for DNA {
     }
 }
 
+
 pub trait Genetic {
     fn compress(&self) -> GeneticType;
     fn generait(input: GeneticType) -> Self;
@@ -96,5 +97,6 @@ impl Genetic for u32{
         u32::from_be_bytes(accum)
     }
 }
+
 
 //TODO: going to need to make some convertion tests

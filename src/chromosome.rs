@@ -45,6 +45,12 @@ impl From<Chromosome> for DNA {
     }
 }
 
+impl From<Vec<u8>> for Chromosome{
+    fn from(item: Vec<u8>) -> Chromosome{
+        Chromosome(item)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::super::nucleotide::*;
