@@ -1,1 +1,1 @@
-A simple abstraction of how genetics
+A simple abstraction for genetics.
