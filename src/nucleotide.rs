@@ -1,4 +1,4 @@
-use std::{cmp::PartialEq, convert::From, fmt};
+use std::{cmp::PartialEq, fmt};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Nucleotide {
@@ -33,36 +33,31 @@ impl fmt::Display for Nucleotide {
     }
 }
 
-#[derive(Debug, PartialEq, Eq)]
-pub struct NucleotideSegment(pub [Nucleotide; 4]);
-pub type DNA = Vec<Nucleotide>;
-
-impl From<NucleotideSegment> for u8 {
-    fn from(item: NucleotideSegment) -> u8 {
-        let mut output = 0u8;
-        let n0 = (item.0)[0] as u8;
-        let n1 = (item.0)[1] as u8;
-        let n2 = (item.0)[2] as u8;
-        let n3 = (item.0)[3] as u8;
-        output = output | n0;
-        output = output << 2;
-        output = output | n1;
-        output = output << 2;
-        output = output | n2;
-        output = output << 2;
-        output = output | n3;
-        output
+impl Nucleotide{
+    pub fn to_u8(item: &[Nucleotide]) -> u8{
+       //converting Nucleotides to n = 0..4
+       let mut output = 0u8;
+       let n0 = item[0] as u8;
+       let n1 = item[1] as u8;
+       let n2 = item[2] as u8;
+       let n3 = item[3] as u8;
+       //pushing bits in to a single u8
+       output = output | n0;
+       output = output << 2;
+       output = output | n1;
+       output = output << 2;
+       output = output | n2;
+       output = output << 2;
+       output = output | n3;
+       output
     }
-}
 
-impl From<u8> for NucleotideSegment {
-    fn from(item: u8) -> NucleotideSegment {
+    pub fn to_nucleotides(item: u8) -> [Nucleotide;4]{
         //mask for the last 2 bits
         const MASK: u8 = 0b00000011;
         let mut item = item;
         let mut output = [A; 4];
-        //run through the bits looking at the last two every time and converting them in to
-        //Nucleotides
+        //run through the bits looking at the last two every time and converting them in 
         for i in 0..4 {
             let n = match item & MASK {
                 0 => A,
@@ -75,48 +70,13 @@ impl From<u8> for NucleotideSegment {
             output[3 - i] = n;
             item = item >> 2;
         }
-        NucleotideSegment(output)
+        output
     }
 }
 
+
 #[cfg(test)]
-mod tests {
+mod test {
     use super::*;
-    const SAMPLE_A: NucleotideSegment = NucleotideSegment([A, A, A, A]); //0
-    const SAMPLE_B: NucleotideSegment = NucleotideSegment([G, G, G, G]); //85
-    const SAMPLE_C: NucleotideSegment = NucleotideSegment([T, T, T, T]); //225
-    const SAMPLE_D: NucleotideSegment = NucleotideSegment([T, A, A, A]); //192
-    const SAMPLE_E: NucleotideSegment = NucleotideSegment([T, C, G, A]); //228
-
-    #[test]
-    fn u8_from_nucleotide_segment() {
-        assert_eq!(0u8, SAMPLE_A.into());
-        assert_eq!(85u8, SAMPLE_B.into());
-        assert_eq!(255u8, SAMPLE_C.into());
-        assert_eq!(192u8, SAMPLE_D.into());
-    }
-
-    #[test]
-    fn nucleotide_segment_from_u8() {
-        assert_eq!(SAMPLE_A, 0u8.into());
-        assert_eq!(SAMPLE_B, 85u8.into());
-        assert_eq!(SAMPLE_C, 255u8.into());
-        assert_eq!(SAMPLE_D, 192u8.into());
-    }
-    #[test]
-    fn convertion() {
-        //repeated convertion
-        let result: u8 = SAMPLE_D.into();
-        assert_eq!(192u8, result);
-        let result: NucleotideSegment = result.into();
-        assert_eq!(SAMPLE_D, result);
-
-        //a bit more on a harder case
-        let result: u8 = SAMPLE_E.into();
-        assert_eq!(228, result);
-        let result: NucleotideSegment = result.into();
-        assert_eq!(SAMPLE_E, result);
-        let result: u8 = result.into();
-        assert_eq!(228, result);
-    }
+    
 }

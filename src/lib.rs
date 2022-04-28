@@ -1,9 +1,12 @@
-mod aux;
-mod chromosome;
-mod genetic;
 mod nucleotide;
-mod mutation;
+mod dna;
+mod genetic;
 
-pub use chromosome::*;
-pub use genetic::*;
-pub use nucleotide::*;
+pub use genetic::Genetic;
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+}
