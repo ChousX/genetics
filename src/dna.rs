@@ -1,5 +1,4 @@
 use super::nucleotide::*;
-use std::convert::TryFrom;
 
 pub type DNA = Vec<Nucleotide>;
 

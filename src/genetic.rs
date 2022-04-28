@@ -223,3 +223,63 @@ impl Genetic for f64{
         32
     }
 }
+
+//lots of tests are needed... uhg
+#[cfg(test)]
+mod tests{
+    use super::*;
+    use crate::nucleotide::{A, G, C, T};
+
+    const D4_0: [Nucleotide; 4] = [A, A, A, A];
+    const D8_0: [Nucleotide; 8] = [A, A, A, A, A, A, A, A];
+    const D16_0: [Nucleotide; 16] = [A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A];
+    const D32_0: [Nucleotide; 32] = [A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A,A, A, A, A, A, A, A, A];
+
+    const D4_85: [Nucleotide; 4] = [G, G, G, G];
+    const D4_27: [Nucleotide; 4] = [A, G, C, T];
+
+    const D12_0_85_27: [Nucleotide; 12] = [A, A, A, A, G, G, G, G, A, G, C, T];
+    const D16_00: [Nucleotide; 16] = [A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A];
+    const D32_00: [Nucleotide; 32] = [A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A,A, A, A, A, A, A, A, A];
+
+    const C1_0: [u8;1] = [0];
+    const C2_0: [u8;2] = [0, 0];
+    const C4_0: [u8;4] = [0, 0, 0, 0];
+    const C8_0: [u8;8] = [0, 0, 0, 0, 0, 0, 0, 0];
+    
+    const C3_0_85_27: [u8; 3] = [0, 85, 27];
+
+    #[test]
+    fn nucleotides_to_u8(){
+        assert_eq!(0, Nucleotide::to_u8(&D4_0));
+        assert_ne!(u8::MAX, Nucleotide::to_u8(&D4_0));
+        
+        assert_eq!(D4_0.to_vec(), 0u8.get_dna());
+        assert_ne!(D4_0.to_vec(), 1u8.get_dna());
+    }
+
+    #[test]
+    fn chromosome_compretion_0(){
+        assert_eq!(0, Chromosome::from_dna(&D4_0.to_vec())[0]);
+        assert_eq!(vec![0,0], Chromosome::from_dna(&D8_0.to_vec()));
+        assert_eq!(vec![0,0, 0, 0], Chromosome::from_dna(&D16_0.to_vec()));
+        assert_eq!(vec![0, 0,0, 0, 0, 0, 0, 0], Chromosome::from_dna(&D32_0.to_vec()));
+
+        
+    }
+
+    #[test]
+    fn chromosome_decompretion_0(){
+        assert_eq!(D4_0.to_vec(), C1_0.to_vec().get_dna());
+        assert_eq!(D8_0.to_vec(), C2_0.to_vec().get_dna());
+        assert_eq!(D16_0.to_vec(),C4_0.to_vec().get_dna());
+        assert_eq!(D32_0.to_vec(),C8_0.to_vec().get_dna());
+    }
+    
+    #[test]
+    fn chromosome_decompretion(){
+        assert_eq!(D12_0_85_27.to_vec(), C3_0_85_27.to_vec().get_dna());
+    }
+
+
+}
